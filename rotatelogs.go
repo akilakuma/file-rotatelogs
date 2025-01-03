@@ -31,6 +31,9 @@ func New(p string, options ...Option) (*RotateLogs, error) {
 		globPattern = re.ReplaceAllString(globPattern, "*")
 	}
 
+	// .1 .2 .3 extend log file to pattern
+	globPattern = globPattern + "*"
+
 	pattern, err := strftime.New(p)
 	if err != nil {
 		return nil, errors.Wrap(err, `invalid strftime pattern`)
